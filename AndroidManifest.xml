@@ -7,21 +7,36 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
-
-    <application
-        android:allowBackup="true"
+  	<uses-permission android:name="android.permission.INTERNET"/> 
+  	
+    <permission android:name="liu.permission.activity.CHATTING"/> 
+    <permission android:name="liu.permission.service.internet"/> 
+    <application android:theme="@style/AppTheme" 
+        android:label="@string/app_name" 
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+         android:allowBackup="true"> 
+         <activity android:name=".chat.Chat" 
+             android:label="@string/app_name"> 
+             <intent-filter> 
+                 <action android:name="android.intent.action.MAIN"/> 
+                 <category android:name="android.intent.category.LAUNCHER"/> 
+             </intent-filter> 
+        </activity> 
+        
+		<activity android:name=".chat.Chatting" 
+	   			 android:permission="liu.permission.activity.CHATTING">
+             <intent-filter> <action android:name="liu.intent.action.CHATTING"/> 
+                 <category android:name="android.intent.category.DEFAULT"/> 
+             </intent-filter>
+        </activity> 
+        
+         <service android:name=".services.IntentService"
+             android:permission="liu.permission.service.internet"> 
+         </service> 
+    </application> 
+      
+                  
+                      
+ </manifest>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
 
-</manifest>
