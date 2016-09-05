@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Chat</string>
+    <string name="chat_room">聊天室</string>
+    <string name="chat_friend">联系人</string>
+    <string name="chat_send">发送</string>
+    <string name="top_back">返回</string>
+    <string name="text_input_hint">输入要发送的内容：</string>
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.liuben.utils.TopBar
+        android:id="@+id/chatting_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+    </com.liuben.utils.TopBar>
+
+    <ListView
+        android:id="@+id/chat_frame_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null" >
+    </ListView>
+
+    <include layout="@layout/chat_send" />
+
+</LinearLayout>
