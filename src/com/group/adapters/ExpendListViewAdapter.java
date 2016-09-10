@@ -29,6 +29,7 @@ public class ExpendListViewAdapter extends ArrayAdapter<String> {
 		if (convertView == null) {
 			convertView = minflater.inflate(R.layout.treeview_item, parent,
 					false);
+			
 			holder = new ViewHoder();
 			holder.image = (ImageView) convertView
 					.findViewById(R.id.textview_item_icon);
