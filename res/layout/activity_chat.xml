@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.liuben.utils.TopBar
+    <com.group.utils.TopBar
         android:id="@+id/activity_topbar"
         android:layout_width="match_parent"
         android:layout_height="60dp" />

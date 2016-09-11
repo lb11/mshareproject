@@ -19,37 +19,11 @@ import android.util.Log;
 public class MDatas implements AbstractDB {
 	private MyOpenHelper openHelper;
 
-	private String table_name = "tabledatas";
+	private String table_name;
 
-	// 表单创建的语句。
-	public static String create_table_chathistory = "create table tabledatas("//
-			+ "number varchar(20) not null primary key,"// 编号
-			+ "whichgroup varchar(20) not null"// 所在的分组。
-			+ ");";
 
-	/**
-	 * 限制条件的集合。
-	 * 
-	 */
-	public static class TableDatasLimits {
-		public static final String WhRER_NUMBER = " number = ? ";
-		public static final String WhRER_WHICHGROUP = " whichgroup = ? ";
-
-		public static final String CON_AND = "and";
-	}
-
-	private static MDatas mInstance = null;
-
-	public static MDatas getInstance(Context context, String name) {
-		if (mInstance == null) {
-			mInstance = new MDatas(context, name);
-		}
-
-		return mInstance;
-	}
-
-	private MDatas(Context context, String name) {
-		openHelper = new MyOpenHelper(context, name);
+	public MDatas(Context context) {
+		openHelper = new MyOpenHelper(context);
 	}
 
 	@Override
@@ -106,5 +80,13 @@ public class MDatas implements AbstractDB {
 		if (date != null)
 			date.close();
 		return lists;
+	}
+
+	@Override
+	public void clearnAll() {
+		List<Map<String,String>> lists = quere(null, null);
+		for(Map<String,String> map : lists){
+			delete(" where "+ map.keySet().toArray()[0] + "= ? ", new Object[]{map.get(map.keySet().toArray()[0]) });
+		}
 	}
 }

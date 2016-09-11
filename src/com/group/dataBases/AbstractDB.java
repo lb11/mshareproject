@@ -29,5 +29,7 @@ public interface AbstractDB {
 	 * @return
 	 */
 	public List<Map<String, String>> quere(String where, String[] objects);
+	
+	public void clearnAll();
 
 }

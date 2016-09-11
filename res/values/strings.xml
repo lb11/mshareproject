@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Chat</string>
-    <string name="chat_room">聊天室</string>
+    <string name="chat_room">群组</string>
     <string name="chat_friend">联系人</string>
     <string name="chat_send">发送</string>
     <string name="top_back">返回</string>

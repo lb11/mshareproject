@@ -16,18 +16,19 @@ import android.util.Log;
  * @author Administrator
  * 
  */
-public class HistoryChat extends MDatas {
+public class GroupHistoryChat extends MDatas {
 	private MyOpenHelper openHelper;
 
-	private String table_name = "chathistory";
+	private String table_name = "groupchathistory";
 
 	// 表单创建的语句。
-	public static String create_table_chathistory = "create table chathistory("//
+	public static String create_table_groupchathistory = "create table groupchathistory("//
 			+ "user varchar(20) not null,"// 用户的信息
+			+ "group varchar(20) not null,"// 用户的信息
 			+ "who varchar(20) not null,"// 发送者的号码
 			+ "message varchar(50),"// 消息的内容。
 			+ "time date,"// 消息的时间。
-			+ "primary key(user,who,time)"// 主键
+			+ "primary key(user,group,who,time)"// 主键
 			+ ");";
 
 	/**
@@ -35,7 +36,8 @@ public class HistoryChat extends MDatas {
 	 * 
 	 */
 	public static class HistoryChatLimits {
-		public static final String WhRER_GROUP = " user = ? ";
+		public static final String WHERE_USER = "user = ? ";
+		public static final String WhRER_GROUP = " group = ? ";
 		public static final String WhRER_WHO = " who = ? ";
 		public static final String WhRER_TIME = " time = ? ";
 		public static final String WhRER_MESSAGE = " message = ? ";
@@ -43,17 +45,17 @@ public class HistoryChat extends MDatas {
 		public static final String CON_AND = "and";
 	}
 
-	private static HistoryChat mInstance = null;
+	private static GroupHistoryChat mInstance = null;
 
-	public static HistoryChat getInstance(Context context) {
+	public static GroupHistoryChat getInstance(Context context) {
 		if (mInstance == null) {
-			mInstance = new HistoryChat(context);
+			mInstance = new GroupHistoryChat(context);
 		}
 
 		return mInstance;
 	}
 
-	private HistoryChat(Context context) {
+	private GroupHistoryChat(Context context ) {
 		super(context);
 		openHelper = new MyOpenHelper(context);
 	}
@@ -63,7 +65,7 @@ public class HistoryChat extends MDatas {
 		SQLiteDatabase date = openHelper.getWritableDatabase();
 		try {
 			String sql = "insert into " + table_name
-					+ "(user,who,message,time)values(?,?,?,?)";
+					+ "(user,group,who,message,time)values(?,?,?,?,?)";
 			date.execSQL(sql, objects);
 		} catch (Exception e) {
 			Log.i("MSGERROR", "ERROR _liubenm ");
@@ -112,11 +114,5 @@ public class HistoryChat extends MDatas {
 		if (date != null)
 			date.close();
 		return lists;
-	}
-
-	@Override
-	public void clearnAll() {
-		// TODO Auto-generated method stub
-		
 	}
 }
