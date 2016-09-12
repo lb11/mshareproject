@@ -83,7 +83,7 @@ public class MessageInfo {
 	 * 
 	 * @return 谁接受，来自谁的消息，消息。
 	 */
-	public String toStringForSend() {
+	public String toString() {
 		return InternetPaser.PaserForSendMessage(from, to, text);
 	}
 }

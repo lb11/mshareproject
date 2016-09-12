@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.liuben.utils.TopBar
+    <com.group.utils.TopBar
         android:id="@+id/chatting_topbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
-    </com.liuben.utils.TopBar>
+        android:layout_height="50dp" />
 
     <ListView
         android:id="@+id/chat_frame_listview"

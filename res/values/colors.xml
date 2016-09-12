@@ -3,5 +3,6 @@
 
     <color name="background_blue">#00CDCD</color>
     <color name="background_white">#ffffff</color>
+        <color name="login_background">#353440</color>
 
 </resources>

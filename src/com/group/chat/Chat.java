@@ -59,6 +59,7 @@ public class Chat extends FragmentActivity implements OnClickListener {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			mIntentService = ((MyBinder) service).getService();
+			mIntentService.sendToRegister("123");
 
 			mIntentService.setOnMessageListener(new MessageListener() {
 
@@ -85,7 +86,7 @@ public class Chat extends FragmentActivity implements OnClickListener {
 		Intent bindIntent = new Intent(Chat.this, InternetService.class);
 		bindService(bindIntent, intentServiceCon, Context.BIND_IMPORTANT);
 		startService(bindIntent);
-
+		
 		mFragmentManager = getSupportFragmentManager();
 
 		mTopbar = (TopBar) findViewById(R.id.activity_topbar);
@@ -154,7 +155,6 @@ public class Chat extends FragmentActivity implements OnClickListener {
 		case R.id.text_chat_friends:
 			setWhich(1);
 			break;
-
 		default:
 			break;
 		}

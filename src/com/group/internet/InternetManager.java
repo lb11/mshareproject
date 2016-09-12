@@ -13,12 +13,12 @@ import android.os.Message;
 
 import com.group.utils.M;
 import com.group.utils.MessageInfo;
-
+import com.group.utils.MessageType;
 
 public class InternetManager {
 
 	private String host = "192.168.155.1"; // 要连接的服务端IP地址
-	private int port = 8899; // 要连接的服务端对应的监听端口;
+	private int port = 8912; // 要连接的服务端对应的监听端口;
 	private Socket mSocketClient;
 
 	private Handler hand;
@@ -41,14 +41,35 @@ public class InternetManager {
 
 		PrintStream ps = new PrintStream(mSocketClient.getOutputStream());
 		String line = null;
-		while (mSocketClient.isConnected() && (line = message) != null) {
-			message = null; // 清空发送的消息。
-			ps.println(line);
+		while (true) {
+			if (mSocketClient.isClosed() || !mSocketClient.isConnected())
+				mSocketClient = new Socket(host, port);
+
+			while (mSocketClient.isConnected() && (line = message) != null) {
+				message = null; // 清空发送的消息。
+				ps.println(line);
+				ps.flush();
+			}
 		}
+	}
+	
+	/**
+	 * 注册
+	 */
+	public void sendMessageToRegister(String psward){
+		message = M.Internet.INTERNETREGISTER + " "+null+" "+psward+ "__ben";
+	}
+	
+	public void sendMessageToLogin(){
+		
 	}
 
 	public void sendMessage(MessageInfo msg) {
-		message = msg.toStringForSend();
+		message = msg.toString() + "__ben";
+	}
+
+	public void sendMessage(MessageType msg) {
+		message = msg.toString() + "__ben";
 	}
 
 	/**
@@ -75,6 +96,7 @@ public class InternetManager {
 				while ((line = buffer.readLine()) != null) {
 					Bundle blund = new Bundle();
 					blund.putString("msg", line);
+
 					Message msg = new Message();
 					msg.what = M.Internet.INTERNETMESSAGE;
 					msg.setData(blund);

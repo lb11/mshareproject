@@ -7,12 +7,20 @@ package com.group.utils;
  * 
  */
 public class M {
+	
+	public static String selfNum = "110";
 	/**
 	 * 网络相关的消息变量。
 	 * 
 	 */
 	public static class Internet {
 		public static final int INTERNETMESSAGE = 0x110;
+		
+		
+		public static final int INTERNETREGISTER = 0;
+		public static final int INTERNETLOGIN = 1;
+		public static final int INTERNETMSG = 2;
+		public static final int INTERNETGETALLUSER = 3;
 	}
 
 	public static class ActivityResult {

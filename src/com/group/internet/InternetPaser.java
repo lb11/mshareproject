@@ -1,10 +1,11 @@
 package com.group.internet;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.group.utils.M;
 import com.group.utils.MessageInfo;
-
 
 /**
  * 消息的解析器
@@ -25,7 +26,12 @@ public class InternetPaser {
 	 * @return the style
 	 */
 	public static String PaserForSendMessage(String from, String to, String text) {
-		return to + " " + from + " " + text;
+		return M.Internet.INTERNETMSG + " " + to + " " + from + " " + text;
+	}
+
+	public static String PaserForSendMessafe(int type, String username,
+			String password) {
+		return type + " " + username + " " + password;
 	}
 
 	public void setUsers(ArrayList<String> users) {
@@ -63,6 +69,9 @@ public class InternetPaser {
 	public MessageInfo getMessageInfo() {
 		return info;
 	}
+	
+	private boolean isText;
+	private boolean isSuccess;
 
 	/**
 	 * 进行解析
@@ -70,37 +79,42 @@ public class InternetPaser {
 	 * @param text
 	 */
 	public void Paser(String text) {
-		if (text.contains("reflush:")) {
-			isFlsah = true;
-			int index = text.indexOf('[');
-			text = text.substring(index);
-			index = text.indexOf(']');
-			String groups = text.substring(1, index);
-			String users = text.substring(index + 2, text.length() - 1);
-
-			groups = groups.replace(",", "");
-			users = users.replace(",", "");
-
-			Scanner scanner = new Scanner(groups);
-			while (scanner.hasNext()) {
-				this.groups.add(scanner.next());
-			}
-			scanner.close();
-
-			scanner = new Scanner(users);
-			while (scanner.hasNext()) {
-				this.users.add(scanner.next());
-			}
-			scanner.close();
-
-		} else {
-			Scanner scanner = new Scanner(text);
-			String flag = scanner.next().trim();
-			info.clear();
-			info.setGroup(flag);
-			info.setFrom(scanner.next());
-			info.setText(scanner.next());
-			scanner.close();
+		int index = text.indexOf(" ");
+		int flag = Integer.parseInt(text.substring(0, index).trim());
+		text = text.substring(index).trim();
+		isText = true;
+		switch (flag) {
+		case M.Internet.INTERNETLOGIN:
+			isText = false;
+			isSuccess = text.equals("success");
+			break;
+		case M.Internet.INTERNETREGISTER:
+			index = text.indexOf(" ");
+			info.setFrom(text.substring(0, index).trim());
+			info.setText(text.substring(index + 1).trim());
+			break;
+		case M.Internet.INTERNETMSG:
+			index = text.indexOf(" ");
+			info.setFrom(text.substring(0, index).trim());
+			text = text.substring(index + 1).trim();
+			index = text.indexOf(" ");
+//			info.setDate(new Date(Long.parseLong(text.substring(0, index)
+//					.trim())));
+			info.setText(text.substring(index + 1));
+			break;
+		case M.Internet.INTERNETGETALLUSER:
+			text = text.replaceAll(",", " ");
+			text = text.replace("[", "");
+			text = text.replace("]", "");
+			info.setText(text);
+			info.setFrom(null);
+			break;
+//		case M.Internet.:
+//			isText = false;
+//			isSuccess = false;
+//			break;
+		default:
+			break;
 		}
 	}
 

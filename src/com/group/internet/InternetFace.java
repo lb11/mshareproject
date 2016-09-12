@@ -2,7 +2,6 @@ package com.group.internet;
 
 import java.io.OutputStream;
 
-import com.group.utils.PersonInfo;
 
 /**
  * 网络端的一些接口
@@ -15,16 +14,8 @@ public interface InternetFace {
 	 * 登陆
 	 * @param username
 	 * @param passward
-	 * @return 1 为成功，0为失败
 	 */
-	public int Login(String username,String passward);
-	
-	/**
-	 * 注册
-	 * @param info
-	 * @return
-	 */
-	public String Register(PersonInfo info);
+	public void Login(String username,String passward);
 	
 	
 	/**
@@ -32,9 +23,8 @@ public interface InternetFace {
 	 * @param from 发送方
 	 * @param to	接收方
 	 * @param text	文本
-	 * @return 1 为成功，0为失败
 	 */
-	public int sendText(String from,String to,String text);
+	public void sendText(String from,String to,String text);
 	
 	public int sendText(String from,String to,OutputStream out);
 	
@@ -57,14 +47,5 @@ public interface InternetFace {
 	public int sendFile(String from ,String to,String path);
 	
 	public int sendFile(String to,OutputStream out);
-	
-	/**
-	 * 
-	 * @param who 
-	 * @return 返回个人信息
-	 */
-	public PersonInfo getPersonInfo(String who);
-	
-	
 	
 }

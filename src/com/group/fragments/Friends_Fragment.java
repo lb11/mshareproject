@@ -88,7 +88,8 @@ public class Friends_Fragment extends ListData_Fragment implements
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == M.ActivityResult.RESULTCHATTRING) {
-
+			// 从聊天界面返回。
+			
 		}
 	}
 }

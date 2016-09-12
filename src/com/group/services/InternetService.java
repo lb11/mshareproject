@@ -27,6 +27,7 @@ public class InternetService extends Service {
 	}
 
 	private MessageListener mMListener = null;
+	
 
 	public void setOnMessageListener(MessageListener listener) {
 		mMListener = listener;
@@ -89,6 +90,10 @@ public class InternetService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 		return binder;
+	}
+	
+	public void sendToRegister(String passward){
+		min.sendMessageToRegister(passward);
 	}
 
 	public void sendMessage(String from, String to, String text) {
